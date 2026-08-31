@@ -1,0 +1,21 @@
+# Direwolf config for the RX-only SDR I-Gate — TEMPLATE.
+# Copy to igate.conf ON THE BOX and fill in the operator identity there.
+# The real file is field config and is never committed (same rule as the
+# rocket repo's callsign_binding).
+
+# Audio arrives on stdin from rtl_fm (see the systemd unit / README pipeline)
+ADEVICE stdin null
+ACHANNELS 1
+CHANNEL 0
+
+# --- operator identity: FILL IN ON THE BOX, DO NOT COMMIT ---
+MYCALL N0CALL-10
+# APRS-IS login. Passcode derives from the callsign (well-known algorithm;
+# direwolf ships a generator). Keep it out of git anyway.
+IGSERVER noam.aprs2.net
+IGLOGIN N0CALL 00000
+
+# RX-only gate: no PTT, no digipeating (that's the later, TX-capable phase)
+# Report the gate itself to APRS-IS (position beacon via the -IS side only).
+# Fill in the station coordinates on the box; commented until then.
+#PBEACON sendto=IG delay=0:30 every=60:00 symbol="igate" overlay=R lat=00^00.00N long=000^00.00W comment="Apogee field I-Gate (RX-only)"

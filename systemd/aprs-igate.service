@@ -1,0 +1,18 @@
+[Unit]
+Description=APRS RX I-Gate (rtl_fm -> direwolf -> APRS-IS)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+# The V1 pipeline, supervised: SDR audio piped into direwolf as a software
+# TNC. Config lives at /etc/aprs-igate/igate.conf (copied from the repo's
+# example and filled in on the box — operator identity is field config).
+# -g 49.6: fixed max gain — auto-gain and low fixed gains went deaf on the
+# basement coax run (measured 2026-08-31); -t 0 = no colored text (journal-friendly)
+ExecStart=/bin/sh -c 'rtl_fm -f 144.39M -g 49.6 - | direwolf -c /etc/aprs-igate/igate.conf -r 24000 -D 1 -t 0 -'
+Restart=on-failure
+RestartSec=5
+User=rocketman
+
+[Install]
+WantedBy=multi-user.target
