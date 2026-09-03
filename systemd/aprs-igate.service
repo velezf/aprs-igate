@@ -2,6 +2,9 @@
 Description=APRS RX I-Gate (rtl_fm -> direwolf -> APRS-IS)
 After=network-online.target
 Wants=network-online.target
+# One RTL-SDR, one owner: the MCFRS scanner (../mcfrs-scanner) carries the matching
+# Conflicts=aprs-igate.service. Switch with `sdr-mode`, never by hand.
+Conflicts=mcfrs-scanner.service
 
 [Service]
 # The V1 pipeline, supervised: SDR audio piped into direwolf as a software

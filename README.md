@@ -38,6 +38,26 @@ secrets out of it.
 rtl_fm -f 144.39M - | direwolf -c sdr.conf -r 24000 -D 1 -
 ```
 
+## Ports on the box (`apogee-gs` is shared — check before picking one)
+
+Measured 2026-09-02 with `ss -ltnp`; the scanner's port move happened
+because Icecast's stock 8000 landed on direwolf's AGW port. Each repo's
+own ports are authoritative in its config/unit files; this table is the
+cross-repo view so the next tenant does not collide.
+
+| port | owner | where it is set |
+|---|---|---|
+| 8000, 8001 | direwolf AGW / KISS (this repo) | `config/igate.conf.example` |
+| 8080 | rocket ingest dashboard | `lora-rocket-telemetry`, `ground/ingest/` |
+| 8090 | OP25 web terminal (`mcfrs-scanner`) | `systemd/mcfrs-scanner.service` there |
+| 8100 | Icecast stream (`mcfrs-scanner`) | `config/audio.env.example` there |
+| 8421–8423 | pisugar-server | PiSugar package, not ours |
+| 22 | sshd | — |
+
+Same idea for the dongle: the I-Gate and the scanner both `Conflicts=`
+each other (`systemd/aprs-igate.service`), and `sdr-mode` in the scanner
+repo is the switch.
+
 ## Status
 
 **LIVE 2026-08-31** on `apogee-gs` (the Pi 5 — decided over the LePotato,
