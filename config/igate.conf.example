@@ -4,6 +4,10 @@
 # rocket repo's callsign_binding).
 
 # Audio arrives on stdin from rtl_fm (see the systemd unit / README pipeline)
+# Direwolf's TCP ports, stated explicitly (these are its defaults) because the
+# box is shared: the full port map is in README "Ports on the box".
+AGWPORT 8000
+KISSPORT 8001
 ADEVICE stdin null
 ACHANNELS 1
 CHANNEL 0
