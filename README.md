@@ -50,6 +50,7 @@ cross-repo view so the next tenant does not collide.
 | 8000, 8001 | direwolf AGW / KISS (this repo) | `config/igate.conf.example` |
 | 8080 | rocket ingest dashboard | `lora-rocket-telemetry`, `ground/ingest/` |
 | 8090 | OP25 web terminal (`mcfrs-scanner`) | `systemd/mcfrs-scanner.service` there |
+| 8095 | scanner listening page (`mcfrs-scanner`) | `systemd/mcfrs-ui.service` there |
 | 8100 | Icecast stream (`mcfrs-scanner`) | `config/audio.env.example` there |
 | 8421–8423 | pisugar-server | PiSugar package, not ours |
 | 22 | sshd | — |
